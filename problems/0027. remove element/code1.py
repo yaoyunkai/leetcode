@@ -9,5 +9,28 @@ from typing import List
 
 
 class Solution:
+    def removeElement1(self, nums: List[int], val: int) -> int:
+        if not nums:
+            return 0
+
+        count = 0
+        length = len(nums)
+        for i in nums:
+            if i == val:
+                count += 1
+
+        for i in range(count):
+            nums.remove(val)
+
+        return length - count
+
     def removeElement(self, nums: List[int], val: int) -> int:
-        pass
+        if not nums:
+            return 0
+
+        j = 0
+        for i, number in enumerate(nums):
+            if number != val:
+                nums[j] = nums[i]
+                j += 1
+        return j
