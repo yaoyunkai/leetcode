@@ -8,7 +8,7 @@ from typing import List
 
 
 class Solution:
-    def longestCommonPrefix(self, strs: List[str]) -> str:
+    def longestCommonPrefix1(self, strs: List[str]) -> str:
         if not strs:
             return ''
 
@@ -27,3 +27,18 @@ class Solution:
                     return strs[0][:i]
 
         return strs[0]
+
+    def longestCommonPrefix(self, strs):
+        if not strs: return ""
+        s1 = min(strs)
+        s2 = max(strs)
+        for i, x in enumerate(s1):
+            if x != s2[i]:
+                return s2[:i]
+        return s1
+
+
+if __name__ == '__main__':
+    demo1 = ["flower", "flow", "flight"]
+    print(min(demo1))
+    print(max(demo1))
