@@ -12,5 +12,50 @@ from typing import List
 
 class Solution:
 
+    def removeDuplicates1(self, nums: List[int]) -> int:
+        lo = 1
+        hi = 2
+
+        while hi < len(nums):
+            if nums[hi] == nums[lo] and nums[hi] == nums[lo - 1]:
+                hi += 1
+            else:
+                nums[lo + 1] = nums[hi]
+                lo += 1
+                hi += 1
+
+        return lo + 1
+
     def removeDuplicates(self, nums: List[int]) -> int:
-        pass
+        left = 1
+
+        for right in range(2, len(nums)):
+            if nums[right] == nums[left] and nums[right] == nums[left - 1]:
+                continue
+
+            left += 1
+            nums[left] = nums[right]
+
+        return left + 1
+
+    # 扩展至n个元素
+    def removeDuplicates2(self, nums: List[int], K: int):
+        left = K - 1
+
+        for right in range(K, len(nums)):
+            flag = True
+            for i in range(K):
+                flag *= nums[right] == nums[left - i]
+
+            if flag:
+                continue
+
+            left += 1
+
+            nums[left] = nums[right]
+
+        return left + 1
+
+
+if __name__ == '__main__':
+    Solution().removeDuplicates(nums=[0, 0, 1, 1, 1, 1, 2, 3, 3])

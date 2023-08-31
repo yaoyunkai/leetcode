@@ -8,7 +8,7 @@ from typing import List
 
 
 class Solution:
-    def removeDuplicates(self, nums: List[int]) -> int:
+    def removeDuplicates1(self, nums: List[int]) -> int:
         """
         小于lo的都是已经排序的
         等于lo的正在比较的
@@ -29,6 +29,17 @@ class Solution:
                 hi += 1
 
         return lo + 1
+
+    def removeDuplicates(self, nums: List[int]):
+        left = 0
+        for num in nums:
+            if num == nums[left]:
+                continue
+
+            left += 1
+            nums[left] = num
+
+        return left + 1
 
 
 if __name__ == '__main__':
