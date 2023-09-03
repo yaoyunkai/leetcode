@@ -33,6 +33,20 @@ class Solution:
 
         return root.next
 
+    def reverseList2(self, head: Optional[ListNode]) -> Optional[ListNode]:
+
+        def recur(cur, pre):
+            # 终止条件
+            if not cur:
+                return pre
+
+            # 递归后继结点
+            res = recur(cur.next, cur)
+            cur.next = pre
+            return res
+
+        return recur(head, None)
+
     def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
         # 不用 new 对象
 
@@ -63,4 +77,4 @@ if __name__ == '__main__':
     a3.next = a2
     a2.next = a1
 
-    Solution().reverseList(a3)
+    Solution().reverseList2(a3)
