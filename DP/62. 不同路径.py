@@ -50,6 +50,23 @@ class Solution:
         pprint.pprint(dp)
         return dp[m - 1][n - 1]
 
+    def uniquePaths2(self, m: int, n: int) -> int:
+        """
+        每一步骤中的状态值只与左边相邻的值和上面的值相关
+        优化空间: 只使用了左边和上边两个位置
+        
+        :param m: 
+        :param n: 
+        :return: 
+        """
+        pre = [1] * n
+        cur = [1] * n
+        for i in range(1, m):
+            for j in range(1, n):
+                cur[j] = pre[j] + cur[j - 1]
+            pre = cur[:]
+        return pre[-1]
+
 
 if __name__ == '__main__':
-    Solution().uniquePaths(3, 7)
+    Solution().uniquePaths2(3, 7)
