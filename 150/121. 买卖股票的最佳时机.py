@@ -21,7 +21,7 @@ class Solution:
 
         return max_val
 
-    def maxProfit(self, prices: List[int]) -> int:
+    def maxProfit2(self, prices: List[int]) -> int:
 
         min_price = float('+inf')
         max_profit = 0
@@ -31,6 +31,20 @@ class Solution:
             min_price = min(price, min_price)
 
         return max_profit
+
+    def maxProfit(self, prices: List[int]) -> int:
+        n = len(prices)
+
+        if n == 0:
+            return 0
+
+        dp = [0 for _ in range(n)]
+        min_price = prices[0]
+
+        for i in range(1, n):
+            min_price = min(min_price, prices[i])
+            dp[i] = max(dp[i - 1], prices[i] - min_price)
+        return dp[n - 1]
 
 
 if __name__ == '__main__':
