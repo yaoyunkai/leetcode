@@ -20,7 +20,8 @@ class Solution:
             if ch in allow:
                 new.append(ch)
 
-        new = ''.join(new)
+        # 不是必须的
+        # new = ''.join(new)
 
         n = len(new)
 
@@ -33,3 +34,6 @@ class Solution:
 if __name__ == '__main__':
     ret = Solution().isPalindrome("A man, a plan, a canal: Panama")
     print(ret)
+
+    s1 = 'xxxcbadabcxx'
+    s2 = 'yyyyyabbax'
