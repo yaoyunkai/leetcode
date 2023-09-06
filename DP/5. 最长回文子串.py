@@ -51,12 +51,6 @@ class Solution:
         return True
 
     def longestPalindrome(self, s: str) -> str:
-        """
-        暴力破解
-
-        :param s:
-        :return:
-        """
         n = len(s)
         if n < 2:
             return s
@@ -67,17 +61,23 @@ class Solution:
         begin = 0
 
         # 动态数组: 保存 s[i...j] 是否为回文数
-        dp = [[0 for _ in range(n)] for _ in range(n)]
+        # 由于 s[i..j] 表示 s 的一个子串，因此 i 和 j 的关系是 i <= j，只需要填这张表格对角线以上的部分；
+        dp = [[-1 for _ in range(n)] for _ in range(n)]
 
+        # 单个字符一定是回文串，因此把对角线先初始化为 true
+        # 根据第 2 步的说明：当 s[i..j] 的长度为 2 时，只需要判断 s[i] 是否等于 s[j]
         for i in range(n):
             dp[i][i] = 1
 
+        # j: 结束位置 i: 起始位置
         for j in range(1, n):
             for i in range(0, j):
                 if s[i] != s[j]:
                     dp[i][j] = 0
                 else:
-                    if j - 1 - (i + 1) < 2:
+                    # 子串长度为2或者3的时候
+                    # if j - 1 - (i + 1) + 1 < 2:
+                    if j - i < 3:
                         dp[i][j] = 1
                     else:
                         dp[i][j] = dp[i + 1][j - 1]
@@ -90,4 +90,6 @@ class Solution:
 
 
 if __name__ == '__main__':
-    Solution().longestPalindrome('xxabcbaxxxrrtt')
+    s1 = "aacabd"
+
+    Solution().longestPalindrome(s1)
