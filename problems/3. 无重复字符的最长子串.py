@@ -23,7 +23,7 @@ class Solution:
 
         return maxn
 
-    def lengthOfLongestSubstring(self, s: str) -> int:
+    def lengthOfLongestSubstring2(self, s: str) -> int:
         if not s:
             return 0
 
@@ -48,8 +48,33 @@ class Solution:
 
         return max_len
 
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        哈希表 dic 统计： 指针 j 遍历字符 s ，哈希表统计字符 s[j] 最后一次出现的索引 。
+        更新左指针 i ： 根据上轮左指针 i和 dic[s[j]] ，每轮更新左边界 i ，保证区间 [i+1,j]内无重复字符且最大。
+        更新结果 res： 取上轮 res 和本轮双指针区间 [i+1,j] 的宽度（即 j−i ）中的最大值。
+
+
+        :param s:
+        :return:
+        """
+        dic = {}
+        res = 0
+        i = -1
+
+        for j in range(len(s)):
+            if s[j] in dic:
+                # 只有在重复时才会移动 i
+                i = max(dic[s[j]], i)
+
+            dic[s[j]] = j
+
+            res = max(res, j - i)
+
+        return res
+
 
 if __name__ == '__main__':
-    Solution().lengthOfLongestSubstring('abcabcbb')
+    Solution().lengthOfLongestSubstring('abcxabcbb')
     Solution().lengthOfLongestSubstring('bbbbb')
     Solution().lengthOfLongestSubstring('au')
