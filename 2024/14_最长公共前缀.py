@@ -8,8 +8,18 @@ from typing import List
 
 class Solution:
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        sorted(strs)
-        print(strs)
+        if not strs:
+            return ""
+
+        str0 = min(strs)
+        str1 = max(strs)
+
+        for i in range(len(str0)):
+            if str0[i] != str1[i]:
+                return str0[:i]
+
+        # all str0 char matched
+        return str0
 
 
 if __name__ == '__main__':
