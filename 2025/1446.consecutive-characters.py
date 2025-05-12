@@ -14,4 +14,22 @@ created at 2025/5/10
 
 class Solution:
     def maxPower(self, s: str) -> int:
-        pass
+        if len(s) == 1:
+            return 1
+
+        cnt = 0
+        prev = 0
+        cur = 0
+
+        while cur < len(s):
+            if s[prev] == s[cur]:
+                cur += 1
+            else:
+                cnt = max(cur - prev, cnt)
+                prev = cur
+
+        return max(cur - prev, cnt)
+
+
+if __name__ == '__main__':
+    Solution().maxPower('cc')
